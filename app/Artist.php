@@ -29,6 +29,8 @@ class Artist extends Model
             'contact_instagram' => 'required',
             'contact_facebook' => 'required',
             'description' => 'required',
+            'achievement_name0' => 'required',
+            'achievement_content0' => 'required',
         );
     }
 }

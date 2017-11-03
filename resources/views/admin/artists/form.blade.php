@@ -70,6 +70,60 @@
                         !!}
                     </div>
                     
+                    <h3>Osiągnięcia</h3>
+                    
+                    @if(isset($artist)) 
+                        @foreach($artist->achievements as $achievement)
+                            <div class="form-group">
+                                {!! Form::label('achievement_name'.$loop->index, 'Nazwa osiągnięcia') !!}
+                                {!! Form::text(
+                                    'achievement_name'.$loop->index,
+                                    Input::old('achievement_name'.$loop->index) != null ? Input::old('achievement_name'.$loop->index) : $achievement->name,
+                                    ['class' => 'form-control']) 
+                                !!}
+                                {!! Form::hidden('achievement_id'.$loop->index, 
+                                    $achievement->id,
+                                    array())
+                                !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('achievement_content'.$loop->index, 'Opis osiągnięcia') !!}
+                                {!! Form::textarea(
+                                    'achievement_content'.$loop->index,
+                                    Input::old('achievement_content'.$loop->index) != null ? Input::old('achevement_content'.$loop->index) : $achievement->content,
+                                    ['class' => 'form-control']) 
+                                !!}
+                            </div>
+                            @php $i = $loop->index; $i++; @endphp
+                        @endforeach
+                    
+                    @else
+                        <div class="form-group">
+                            {!! Form::label('achievement_name0', 'Nazwa osiągnięcia') !!}
+                            {!! Form::text(
+                                'achievement_name0',
+                                null,
+                                ['class' => 'form-control']) 
+                            !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('achievement_content0', 'Opis osiągnięcia') !!}
+                            {!! Form::textarea(
+                                'achievement_content0',
+                                null,
+                                ['class' => 'form-control']) 
+                            !!}
+                        </div>
+                        @php $i = 1 @endphp
+                    @endif
+                    
+                    <div id="achievements"></div>
+                    
+                    <a data-index="{{ $i }}" class="addNewAchievement btn btn-info">Dodaj kolejne osiągnięcie</a>
+                    
+                    
                     <a href="{{ route('admin.artists.index') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Powrót</a>
                     {{ Form::button(isset($artist) ? '<i class="fa fa-pencil-square-o"></i> Zapisz' : '<i class="fa fa-plus"></i> Dodaj', ['class' => 'btn btn-success', 'type' => 'submit']) }}
                 </div>
@@ -79,6 +133,42 @@
 @stop
 
 @section('scripts')
+<script>
+$( document ).on('click', '.addNewAchievement', function(e){ 
+    var index = $(this).data('index');
+    
+    var formGroup = document.createElement('div');
+    formGroup.className = 'form-group';
+    
+    var label = document.createElement('label');
+    label.for = 'achievement_name' + index;
+    label.innerHTML = 'Nazwa osiągnięcia ' + parseInt(index + 1);
+    formGroup.appendChild(label);
+    
+    var input = document.createElement('input');
+    input.name = 'achievement_name' + index;
+    input.className = 'form-control';
+    formGroup.appendChild(input);
+    
+    var label = document.createElement('label');
+    label.for = 'achievement_content' + index;
+    label.innerHTML = 'Opis osiągnięcia ' + parseInt(index + 1);
+    formGroup.appendChild(label);
+    
+    var input = document.createElement('textarea');
+    input.name = 'achievement_content' + index;
+    input.className = 'form-control';
+    formGroup.appendChild(input);
+    
+    var achievements = document.getElementById('achievements');
+    achievements.appendChild(formGroup);
+    
+    index = parseInt(index);
+    index++;
+    
+    $(this).data('index', index);
+});
+</script>
 @stop
 
 

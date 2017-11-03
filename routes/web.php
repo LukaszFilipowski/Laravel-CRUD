@@ -51,7 +51,7 @@ Route::prefix('admin')->group(function () {
         Route::get('artists/create', 'Admin\ArtistController@create')->name('admin.artists.create');
         Route::post('artists/create', 'Admin\ArtistController@store')->name('admin.artists.store');
         Route::get('artists/{id}/edit', 'Admin\ArtistController@edit')->name('admin.artists.edit');
-        Route::put('artists/{id}/edit', 'Admin\ArtistController@store')->name('admin.artists.update');
+        Route::put('artists/{id}/edit', 'Admin\ArtistController@update')->name('admin.artists.update');
         Route::get('artists/{id}/delete', 'Admin\ArtistController@delete')->name('admin.artists.delete');
         
     });
