@@ -10,7 +10,7 @@ class Artist extends Model
     protected $primaryKey = 'id';
     
     protected $fillable = [
-        'name', 'category', 'contact_mail', 'contact_instagram', 'contact_facebook', 'description'
+        'name', 'category', 'contact_mail', 'contact_instagram', 'contact_facebook', 'description', 'accepted'
     ];
     
     public function achievements() {

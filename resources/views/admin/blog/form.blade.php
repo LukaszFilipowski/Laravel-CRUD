@@ -34,7 +34,7 @@
                         !!}
                     </div>
                     
-                    <a href="{{ route('admin.pages.index') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Powrót</a>
+                    <a href="{{ route('admin.blog.index') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Powrót</a>
                     {{ Form::button(isset($post) ? '<i class="fa fa-pencil-square-o"></i> Zapisz' : '<i class="fa fa-plus"></i> Dodaj', ['class' => 'btn btn-success', 'type' => 'submit']) }}
                 </div>
             </div>
