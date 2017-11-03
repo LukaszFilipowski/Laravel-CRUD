@@ -20,4 +20,15 @@ class Artist extends Model
     public function portfolioItem() {
         return $this->hasMany('App\Portfolio');
     }
+    
+    public static function validation() {
+        return array(
+            'name' => 'required',
+            'category' => 'required',
+            'contact_mail' => 'required',
+            'contact_instagram' => 'required',
+            'contact_facebook' => 'required',
+            'description' => 'required',
+        );
+    }
 }

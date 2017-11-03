@@ -22,19 +22,10 @@ class ArtistController extends Controller
     }
     
     public function store(Request $request) {
-        $rules = array(
-            'name' => 'required',
-            'category' => 'required',
-            'contact_mail' => 'required',
-            'contact_instagram' => 'required',
-            'contact_facebook' => 'required',
-            'description' => 'required',
-        );
-        $this->validate($request, $rules); 
+        $this->validate($request, Artist::validation()); 
         
         $artist = new Artist;
         $artist->accepted = 1;
-        
         $artist->fill($request->only(['name', 'category', 'contact_mail', 'contact_instagram', 'contact_facebook', 'description']));
         
         if ($artist->save()) {
@@ -45,15 +36,8 @@ class ArtistController extends Controller
     }
     
     public function update(Request $request, $id) {
-        $rules = array(
-            'name' => 'required',
-            'category' => 'required',
-            'contact_mail' => 'required',
-            'contact_instagram' => 'required',
-            'contact_facebook' => 'required',
-            'description' => 'required',
-        );
-        $this->validate($request, $rules); 
+        
+        $this->validate($request, Artist::validation()); 
         
         $artist = Artist::find($id); 
         $artist->fill($request->only(['name', 'category', 'contact_mail', 'contact_instagram', 'contact_facebook', 'description']));
