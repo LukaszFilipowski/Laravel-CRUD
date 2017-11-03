@@ -21,7 +21,7 @@ class ArtistController extends Controller
         return view('admin.artists.form');
     }
     
-    public function store(Request $request, $id = null) {
+    public function store(Request $request) {
         $rules = array(
             'name' => 'required',
             'category' => 'required',
@@ -32,12 +32,8 @@ class ArtistController extends Controller
         );
         $this->validate($request, $rules); 
         
-        if ($id != null) {
-            $artist = Artist::find($id); 
-        } else {
-            $artist = new Artist;
-            $artist->accepted = 1;
-        }
+        $artist = new Artist;
+        $artist->accepted = 1;
         
         $artist->fill($request->only(['name', 'category', 'contact_mail', 'contact_instagram', 'contact_facebook', 'description']));
         
@@ -46,6 +42,27 @@ class ArtistController extends Controller
         }
         
         return redirect()->route('admin.artists.index')->withErrors('Wystąpił błąd podczas dodawania artysty! Spróbuj ponownie.');
+    }
+    
+    public function update(Request $request, $id) {
+        $rules = array(
+            'name' => 'required',
+            'category' => 'required',
+            'contact_mail' => 'required',
+            'contact_instagram' => 'required',
+            'contact_facebook' => 'required',
+            'description' => 'required',
+        );
+        $this->validate($request, $rules); 
+        
+        $artist = Artist::find($id); 
+        $artist->fill($request->only(['name', 'category', 'contact_mail', 'contact_instagram', 'contact_facebook', 'description']));
+        
+        if ($artist->save()) {
+            return redirect()->route('admin.artists.index')->withSuccess('Pomyślnie edytowano artystę!');
+        }
+        
+        return redirect()->route('admin.artists.index')->withErrors('Wystąpił błąd podczas edycji artysty! Spróbuj ponownie.');
     }
     
     public function edit($id) {

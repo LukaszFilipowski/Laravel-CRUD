@@ -34,10 +34,10 @@ class BlogController extends Controller
         
         $blog->fill($request->only(['name', 'content']));
         if ($blog->save()) {
-            return redirect()->route('admin.blog.index')->withSuccess('Pomyślnie dodano post!');
+            return redirect()->route('admin.blog.index')->withSuccess('Pomyślnie '.($id != null ? 'edytowano' : 'dodano').' post!');
         }
         
-        return redirect()->route('admin.blog.index')->withErrors('Wystąpił błąd podczas dodawania posta! Spróbuj ponownie.');
+        return redirect()->route('admin.blog.index')->withErrors('Wystąpił błąd podczas '.($id != null ? 'edycji' : 'dodawania').' posta! Spróbuj ponownie.');
     }
     
     public function edit($id) {

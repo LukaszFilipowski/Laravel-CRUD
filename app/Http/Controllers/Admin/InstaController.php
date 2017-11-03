@@ -33,10 +33,10 @@ class InstaController extends Controller
         
         $insta->fill($request->only('name'));
         if ($insta->save()) {
-            return redirect()->route('admin.instas.index')->withSuccess('Pomyślnie dodano konto insta!');
+            return redirect()->route('admin.instas.index')->withSuccess('Pomyślnie '.($id != null ? 'edytowano' : 'dodano').' konto insta!');
         }
         
-        return redirect()->route('admin.instas.index')->withErrors('Wystąpił błąd podczas dodawania konta insta! Spróbuj ponownie.');
+        return redirect()->route('admin.instas.index')->withErrors('Wystąpił błąd podczas '.($id != null ? 'edycji' : 'dodawania').' konta insta! Spróbuj ponownie.');
     }
     
     public function edit($id) {

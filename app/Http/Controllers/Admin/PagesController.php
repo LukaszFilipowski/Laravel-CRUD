@@ -35,10 +35,10 @@ class PagesController extends Controller
         
         $page->fill($request->only(['name', 'code', 'content']));
         if ($page->save()) {
-            return redirect()->route('admin.pages.index')->withSuccess('Pomyślnie dodano stronę!');
+            return redirect()->route('admin.pages.index')->withSuccess('Pomyślnie '.($id != null ? 'edytowano' : 'dodano').' stronę!');
         }
         
-        return redirect()->route('admin.pages.index')->withErrors('Wystąpił błąd podczas dodawania strony! Spróbuj ponownie.');
+        return redirect()->route('admin.pages.index')->withErrors('Wystąpił błąd podczas '.($id != null ? 'edycji' : 'dodawania').' strony! Spróbuj ponownie.');
     }
     
     public function edit($id) {
