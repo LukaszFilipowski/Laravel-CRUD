@@ -38,6 +38,20 @@ class ArtistController extends Controller
             $i++;
         }
         
+        $i= 0;
+        while ($request->has('item_name'.$i)) {
+            $item = new Portfolio;
+            $item->name = $request->get('item_name'.$i);
+            $item->content_type = $request->get('item_content_type'.$i);
+            if ($request->get('item_content_type'.$i) == 0) {
+                $item->addImage($request->file('item_content'.$i));
+            } else {
+                $item->content = $request->get('item_content'.$i);
+            }
+            $artist->portfolioItems()->save($item);
+            $i++;
+        }
+        
         if ($artist->save()) {
             return redirect()->route('admin.artists.index')->withSuccess('Pomyślnie dodano artystę!');
         }
@@ -67,6 +81,26 @@ class ArtistController extends Controller
             $a->name = $request->get('achievement_name'.$i);
             $a->content = $request->get('achievement_content'.$i);
             $artist->achievements()->save($a);
+            $i++;
+        }
+        
+        $i= 0;
+        while ($request->has('item_name'.$i)) {
+            if ($request->has('item_id'.$i)) {
+                $item = Portfolio::find($request->get('item_id'.$i));
+                $oldContentType = $item->content_type;
+            } else {
+                $item = new Portfolio;
+                $oldContentType = -1;
+            }
+            $item->name = $request->get('item_name'.$i);
+            $item->content_type = $request->get('item_content_type'.$i);
+            if ($request->get('item_content_type'.$i) == 0) {
+                $item->addImage($request->file('item_content'.$i), $oldContentType == 0 && $request->has('item_id'.$i));
+            } else {
+                $item->content = $request->get('item_content'.$i);
+            }
+            $artist->portfolioItems()->save($item);
             $i++;
         }
         

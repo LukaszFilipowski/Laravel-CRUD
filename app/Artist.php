@@ -17,7 +17,7 @@ class Artist extends Model
         return $this->hasMany('App\Achievement');
     }
     
-    public function portfolioItem() {
+    public function portfolioItems() {
         return $this->hasMany('App\Portfolio');
     }
     
