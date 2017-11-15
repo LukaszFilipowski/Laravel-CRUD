@@ -11,12 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 //ADMIN ROUTES
 Route::prefix('admin')->group(function () {
     // login
@@ -60,3 +54,10 @@ Route::prefix('admin')->group(function () {
 // storage
 Route::get('public/images/{folder}/{file}', 'StorageController@link')->where('file', '[A-Za-z0-9\-\_\.]+');
 Route::get('easter', 'StorageController@easter')->name('easter');
+
+//site
+Route::get('', 'PageController@homepage')->name('homepage');
+Route::get('blog', 'PageController@blog')->name('blog');
+Route::get('instagram', 'PageController@instagram')->name('instagram');
+Route::get('artists', 'ArtistController@index')->name('artists.index');
+Route::get('page/{name}', 'PageController@custom')->name('customPage');

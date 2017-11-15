@@ -10,18 +10,21 @@ use App\Portfolio;
 
 class ArtistController extends Controller
 {
-    public function index() {
+    public function index() 
+    {
         $artists = Artist::all();
         
         return view('admin.artists.index', compact('artists'));
     }
     
-    public function create() {
+    public function create() 
+    {
         
         return view('admin.artists.form');
     }
     
-    public function store(Request $request) {
+    public function store(Request $request) 
+    {
         $this->validate($request, Artist::validation()); 
         
         $artist = new Artist;
@@ -59,13 +62,15 @@ class ArtistController extends Controller
         return redirect()->route('admin.artists.index')->withErrors('Wystąpił błąd podczas dodawania artysty! Spróbuj ponownie.');
     }
     
-    public function edit($id) {
+    public function edit($id) 
+    {
         $artist = Artist::find($id);
         
         return view('admin.artists.form', compact('artist'));
     }
     
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id) 
+    {
         $this->validate($request, Artist::validation()); 
         
         $artist = Artist::find($id); 
@@ -111,7 +116,8 @@ class ArtistController extends Controller
         return redirect()->route('admin.artists.index')->withErrors('Wystąpił błąd podczas edycji artysty! Spróbuj ponownie.');
     }
     
-    public function delete($id) {
+    public function delete($id) 
+    {
         if (Blog::Artist($id)->delete()) {
             return redirect()->route('admin.artists.index')->withSuccess('Pomyślnie usunięto artystę!');
         }

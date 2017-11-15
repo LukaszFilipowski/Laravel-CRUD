@@ -8,18 +8,21 @@ use App\Blog;
 
 class BlogController extends Controller
 {
-    public function index() {
+    public function index() 
+    {
         $posts = Blog::all();
         
         return view('admin.blog.index', compact('posts'));
     }
     
-    public function create() {
+    public function create() 
+    {
         
         return view('admin.blog.form');
     }
     
-    public function store(Request $request, $id = null) {
+    public function store(Request $request, $id = null) 
+    {
         $rules = array(
             'name' => 'required',
             'content' => 'required',
@@ -40,13 +43,15 @@ class BlogController extends Controller
         return redirect()->route('admin.blog.index')->withErrors('Wystąpił błąd podczas '.($id != null ? 'edycji' : 'dodawania').' posta! Spróbuj ponownie.');
     }
     
-    public function edit($id) {
+    public function edit($id) 
+    {
         $post = Blog::find($id);
         
         return view('admin.blog.form', compact('post'));
     }
     
-    public function delete($id) {
+    public function delete($id) 
+    {
         if (Blog::find($id)->delete()) {
             return redirect()->route('admin.blog.index')->withSuccess('Pomyślnie usunięto post!');
         }

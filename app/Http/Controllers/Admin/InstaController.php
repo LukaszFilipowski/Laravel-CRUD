@@ -8,18 +8,21 @@ use App\Insta;
 
 class InstaController extends Controller
 {
-    public function index() {
+    public function index() 
+    {
         $instas = Insta::all(); 
         
         return view('admin.instas.index', compact('instas'));
     }
     
-    public function create() {
+    public function create() 
+    {
         
         return view('admin.instas.form');
     }
     
-    public function store(Request $request, $id = null) {
+    public function store(Request $request, $id = null) 
+    {
         $rules = array(
             'name' => 'required',
         );
@@ -39,13 +42,15 @@ class InstaController extends Controller
         return redirect()->route('admin.instas.index')->withErrors('Wystąpił błąd podczas '.($id != null ? 'edycji' : 'dodawania').' konta insta! Spróbuj ponownie.');
     }
     
-    public function edit($id) {
+    public function edit($id) 
+    {
         $insta = Insta::find($id);
         
         return view('admin.instas.form', compact('insta'));
     }
     
-    public function delete($id) {
+    public function delete($id) 
+    {
         if (Insta::find($id)->delete()) {
             return redirect()->route('admin.instas.index')->withSuccess('Pomyślnie usunięto konto insta!');
         }

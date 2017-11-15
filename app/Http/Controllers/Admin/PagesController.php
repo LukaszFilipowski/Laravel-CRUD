@@ -8,18 +8,21 @@ use App\Page;
 
 class PagesController extends Controller
 {
-    public function index() {
+    public function index() 
+    {
         $pages = Page::all();
         
         return view('admin.pages.index', compact('pages'));
     }
     
-    public function create() {
+    public function create() 
+    {
         
         return view('admin.pages.form');
     }
     
-    public function store(Request $request, $id = null) {
+    public function store(Request $request, $id = null) 
+    {
         $rules = array(
             'name' => 'required',
             'code' => 'required',
@@ -41,13 +44,15 @@ class PagesController extends Controller
         return redirect()->route('admin.pages.index')->withErrors('Wystąpił błąd podczas '.($id != null ? 'edycji' : 'dodawania').' strony! Spróbuj ponownie.');
     }
     
-    public function edit($id) {
+    public function edit($id) 
+    {
         $page = Page::find($id);
         
         return view('admin.pages.form', compact('page'));
     }
     
-    public function delete($id) {
+    public function delete($id) 
+    {
         if (Page::find($id)->delete()) {
             return redirect()->route('admin.pages.index')->withSuccess('Pomyślnie usunięto stronę!');
         }
