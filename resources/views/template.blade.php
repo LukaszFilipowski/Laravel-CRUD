@@ -57,13 +57,13 @@
         <!-- nav -->
         <nav>
             <ul class="box-primary-nav">
-                <li class="box-label">About me</li>
+                <li class="box-label">type something here</li>
 
-                <li><a href="index.html">Intro</a> <i class="ion-ios-circle-filled color"></i></li>
-                <li><a href="about.html">About me</a></li>
-                <li><a href="services.html">services</a></li>
-                <li><a href="portfolio.html">portfolio</a></li>
-                <li><a href="contact.html">contact me</a></li>
+                <li><a href="{{ route('homepage') }}">Home</a> <i class="ion-ios-circle-filled color"></i></li>
+                <li><a href="{{ route('blog') }}">Blog</a></li>
+                <li><a href="{{ route('instagram') }}">Instagram</a></li>
+                <li><a href="{{ route('artists.index') }}">Artyści</a></li>
+
 
 
 
@@ -82,9 +82,9 @@
         <h1>pageTitletoSet</h1>
         <p><a href="#">Home</a> / About me</p>
     </div>
-    
+
     @yield('content')
-    
+
     <!-- footer -->
     <footer>
         <div class="container-fluid">
